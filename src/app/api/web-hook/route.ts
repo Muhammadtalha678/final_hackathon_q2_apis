@@ -6,6 +6,6 @@ export async function POST(req: NextRequest) {
         return NextResponse.json({ data: body })
     } catch (error) {
 
-        return NextResponse.json({ data: "Error" })
+        return NextResponse.json({ data: "Error" + error })
     }
 }
