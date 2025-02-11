@@ -24,11 +24,11 @@
 import dotenv from 'dotenv';
 dotenv.config();
 
-export const getLocation = async () => {
+export const getLocation = async (ip:string) => {
     try {
         console.log(process.env.IP_INFO_ACCESS_TOKEN);
 
-        const ipResponse = await fetch(`https://ipinfo.io/json?token=${process.env.IP_INFO_ACCESS_TOKEN}`)
+        const ipResponse = await fetch(`https://ipinfo.io/${ip}/json?token=${process.env.IP_INFO_ACCESS_TOKEN}`)
 
         console.log("ipResponse", ipResponse);
 

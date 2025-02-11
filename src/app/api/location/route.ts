@@ -1,11 +1,16 @@
 import { getLocation } from "@/lib/getLocation";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 //create thi api to fetch location in frontend securly 
 
-export async function GET() {
+export async function GET(req: NextRequest) {
     try {
-        const { country, region, city, postal } = await getLocation()
+        const { searchParams } = new URL(req.url)
+        const ip = searchParams.get('ip')
+        if (!ip) {
+            return NextResponse.json({ error: "No IP provided" }, { status: 400 });
+        }
+        const { country, region, city, postal } = await getLocation(ip)
         return NextResponse.json({
             error: false, message: "LocationFetch Successfully", data: { country, region, city, postal }
         })
